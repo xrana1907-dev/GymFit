@@ -28,6 +28,29 @@ jobs:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android APK
-        run: eas build --platform android --profile preview --non-interactive
+        run: eas build --platform android --profile preview --non-interactive --wait
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Get APK download URL
+        run: |
+          BUILD_URL=$(eas build:list --platform android --status finished --limit 1 --json --non-interactive | jq -r '.[0].artifacts.buildUrl')
+
+          if [ -z "$BUILD_URL" ] || [ "$BUILD_URL" = "null" ]; then
+            echo "APK download URL পাওয়া যায়নি"
+            exit 1
+          fi
+
+          echo "Downloading APK..."
+          curl -L "$BUILD_URL" -o GymFit.apk
+
+          ls -lh GymFit.apk
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GymFit-APK
+          path: GymFit.apk
+          retention-days: 30
