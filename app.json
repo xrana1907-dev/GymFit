@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "GymFit",
+    "slug": "gymfit",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "com.gymfit.app"
+    }
+  }
+}
