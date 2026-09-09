@@ -1,6 +1,0 @@
-GYMFIT APK QUICK BUILD
-1) Upload this folder to GitHub.
-2) Create an Expo account and run `eas login` locally, OR use GitHub Actions with EXPO_TOKEN.
-3) In GitHub Settings > Secrets and variables > Actions, add EXPO_TOKEN.
-4) Actions > Build GymFit Android APK > Run workflow.
-5) EAS will build the Android package. For a directly installable APK, use the preview profile.
