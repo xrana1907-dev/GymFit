@@ -22,8 +22,16 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Initialize EAS project
-        run: eas init --account gymfit1 --force --non-interactive
+      - name: Prepare app assets
+        run: |
+          mkdir -p assets
+          cp icon.png assets/icon.png
+          cp adaptive-icon.png assets/adaptive-icon.png
+          echo "Assets prepared:"
+          ls -la assets
+
+      - name: Check Expo project
+        run: npx expo-doctor
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
@@ -34,19 +42,24 @@ jobs:
 
       - name: Get APK download URL
         run: |
-          BUILD_URL=$(eas build:list --platform android --status finished --limit 1 --json --non-interactive | jq -r '.[0].artifacts.buildUrl')
+          BUILD_URL=$(eas build:list \
+            --platform android \
+            --status finished \
+            --limit 1 \
+            --json \
+            --non-interactive | jq -r '.[0].artifacts.buildUrl')
 
           if [ -z "$BUILD_URL" ] || [ "$BUILD_URL" = "null" ]; then
-            echo "APK download URL পাওয়া যায়নি"
+            echo "APK URL not found"
             exit 1
           fi
 
-          echo "Downloading APK..."
-          curl -L "$BUILD_URL" -o GymFit.apk
+          echo "BUILD_URL=$BUILD_URL" >> "$GITHUB_ENV"
 
+      - name: Download APK
+        run: |
+          curl -L "$BUILD_URL" -o GymFit.apk
           ls -lh GymFit.apk
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
