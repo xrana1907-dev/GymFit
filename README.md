@@ -1,49 +1,16 @@
-# GymFit 💪
+# GymFit Fixed
 
-A modern dark-themed fitness app built with Expo + React Native.
+This is a cleaned, minimal Expo/React Native GymFit app intended to avoid startup crashes and blank screens.
 
-## Included
-- Home dashboard
-- Workout plans: Chest, Back, Shoulder, Arms, Legs, Full Body
-- Exercise instructions
-- Rest timer
-- Progress tracking
-- Water tracker
-- Diet / meal plan
-- Achievements
-- Profile and settings
-- Custom GymFit Android icon
+## GitHub APK build
 
-## Run locally
-```bash
-npm install
-npx expo start
-```
-
-Then scan the QR code with Expo Go, or run:
-```bash
-npx expo start --android
-```
-
-## Build Android APK with EAS
-1. Install EAS:
-```bash
-npm install -g eas-cli
-```
-2. Login:
-```bash
-eas login
-```
-3. Configure the project:
-```bash
-eas build:configure
-```
-4. Build:
-```bash
-eas build -p android --profile preview
-```
-
-For a directly installable APK, the `preview` profile is configured with internal distribution.
+1. Upload all files in this project to your GitHub repository root.
+2. Keep the repository secret `EXPO_TOKEN`.
+3. Open **Actions** -> **Build GymFit Android APK** -> **Run workflow**.
+4. After the workflow finishes, download **GymFit-APK** from the Artifacts section.
 
 ## Important
-This is a complete working starter app. Exercise images/videos, cloud accounts, push notifications, online database and real authentication can be added as the next version.
+
+- Do not upload the ZIP itself as one file. Extract it first and upload the project files/folders.
+- `.github/workflows/build-apk.yml` must remain in exactly that folder.
+- The Android package is `com.gymfit.app`.
