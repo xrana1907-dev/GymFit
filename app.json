@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "GymFit",
+    "slug": "gymfit",
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "icon": "./assets/icon.png",
+    "android": {
+      "package": "com.gymfit.app",
+      "versionCode": 3,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B0F14"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b5a299c0-f278-4d86-8d15-a90e12c6efe6"
+      }
+    },
+    "owner": "gymfit1"
+  }
+}
